@@ -1,0 +1,18 @@
+{
+  "name": "create-observable",
+  "version": "0.0.1",
+  "description": "tiny observable helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/**/*.spec.js"
+  },
+  "keywords": [
+    "reactive",
+    "js"
+  ],
+  "author": "Vladimir Lysov",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
