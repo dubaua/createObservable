@@ -30,7 +30,10 @@ reactive.value = 20; // onChange fired, anotherCallback fired
 
 # TODO
 
-[x] Accept either array of callbacks or callback function;
-[ ] callback accept both next and prev value
-[ ] store previous values
-[ ] emit message with next value rather than fire callback
+Accept either array of callbacks or callback function
+
+callback accept both next and prev value
+
+store previous values
+
+emit message with next value rather than fire callback
