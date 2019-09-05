@@ -95,6 +95,23 @@ describe('createObservable', function() {
         observable.onChange = null;
       });
     });
+
+    var currentAndPrev = null;
+    var getPrevAndCurrent = function(current, prev) {
+      currentAndPrev = {
+        current: current,
+        prev: prev,
+      };
+    };
+
+    it('correctly pass prev value as second callback argument', function() {
+      var nextValue = 9;
+      var prevValue = observable.value;
+      observable.onChange = getPrevAndCurrent;
+      observable.value = nextValue;
+      var bothCurrentAndPrevUpdated = currentAndPrev.prev === prevValue && currentAndPrev.current === nextValue;
+      assert.strictEqual(bothCurrentAndPrevUpdated, true);
+    })
   });
 
   describe('correctly getting values', function() {
@@ -111,10 +128,7 @@ describe('createObservable', function() {
 
     it('return proper value on get onChange', function() {
       var onChange = observable.onChange;
-      var isEqualCallbackArray =
-        Array.isArray(onChange) &&
-        onChange.length === 1 &&
-        onChange[0] === callback;
+      var isEqualCallbackArray = Array.isArray(onChange) && onChange.length === 1 && onChange[0] === callback;
       assert.strictEqual(isEqualCallbackArray, true);
     });
   });
