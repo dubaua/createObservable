@@ -7,7 +7,7 @@ function onChange(value, prevValue) {
   console.log(value, prevValue);
 }
 
-var reactive = createObservable(onChange, 0);
+var reactive = createObservable({ onChange: onChange, initial: 0 });
 ```
 
 Next, when you assign new value to your reactive value, callback will be fired, if new value isn't equal to old one:

@@ -1,8 +1,8 @@
 /**
  * Create reactive observable object
  *
- * @param {function} didSet a function called after setting a new value
- * @param {any} initial initial value
+ * @param {any} options.initial initial value
+ * @param {function} options.onChange a function called after setting a new value
  * @returns {object}
  *
  * @example
@@ -10,18 +10,21 @@
  * @name createObservable
  * @function
  */
-module.exports = function(didSet, initial) {
+module.exports = function(options) {
+  var initial = options && options.hasOwnProperty('initial') ? options.initial : undefined;
+  var onChange = options && options.hasOwnProperty('onChange') ? options.onChange : undefined;
+
   return {
     internal: initial,
-    callbacks: typeof didSet === 'function' ? [didSet] : [],
+    callbacks: typeof onChange === 'function' ? [onChange] : [],
 
     get onChange() {
       return this.callbacks;
     },
 
-    set onChange(didSet) {
-      if (typeof didSet === 'function') {
-        this.callbacks.push(didSet);
+    set onChange(callback) {
+      if (typeof callback === 'function') {
+        this.callbacks.push(callback);
       } else {
         throw new Error('[createObservable] callback must be a function.');
       }

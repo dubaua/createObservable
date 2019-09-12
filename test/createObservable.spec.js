@@ -29,13 +29,13 @@ describe('createObservable', function() {
   describe('correctly process arguments', function() {
     var initial = 42;
 
-    var callback = function(value) {
+    var onChange = function(value) {
       return value;
     };
 
-    var observable = createObservable(callback, 42);
+    var observable = createObservable({ initial: initial, onChange: onChange });
     it('first argument passed pushed into callback array if it is a function', function() {
-      assert.strictEqual(observable.callbacks.indexOf(callback) !== -1, true);
+      assert.strictEqual(observable.callbacks.indexOf(onChange) !== -1, true);
     });
 
     it('second argument passed as initial value', function() {
@@ -57,7 +57,7 @@ describe('createObservable', function() {
       counter++;
     };
 
-    var observable = createObservable(setTrackToSquaredObservableAndIncrementCounter);
+    var observable = createObservable({ onChange: setTrackToSquaredObservableAndIncrementCounter });
 
     it('fires callback after changing value', function() {
       observable.value = 2;
@@ -111,14 +111,14 @@ describe('createObservable', function() {
       observable.value = nextValue;
       var bothCurrentAndPrevUpdated = currentAndPrev.prev === prevValue && currentAndPrev.current === nextValue;
       assert.strictEqual(bothCurrentAndPrevUpdated, true);
-    })
+    });
   });
 
   describe('correctly getting values', function() {
-    var callback = function(value) {
+    var onChange = function(value) {
       return value;
     };
-    var observable = createObservable(callback);
+    var observable = createObservable({ onChange: onChange });
 
     var nextValue = 16;
     observable.value = nextValue;
@@ -127,8 +127,9 @@ describe('createObservable', function() {
     });
 
     it('return proper value on get onChange', function() {
-      var onChange = observable.onChange;
-      var isEqualCallbackArray = Array.isArray(onChange) && onChange.length === 1 && onChange[0] === callback;
+      var onChangeArray = observable.onChange;
+      var isEqualCallbackArray =
+        Array.isArray(onChangeArray) && onChangeArray.length === 1 && onChangeArray[0] === onChange;
       assert.strictEqual(isEqualCallbackArray, true);
     });
   });
