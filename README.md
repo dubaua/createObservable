@@ -24,6 +24,7 @@ Further you can add new callbacks, they all will be fired on value change.
 function anotherCallback(value, prevValue) {
   console.log(value * 2, prevValue * 2);
 }
+
 reactive.onChange = anotherCallback;
 reactive.value = 20; // onChange fired, (20, 42) anotherCallback fired (40, 84)
 ```

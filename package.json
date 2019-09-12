@@ -8,7 +8,7 @@
     "reactive",
     "js"
   ],
-  "repository": "git@github.com:dubaua/createObservable.git",
+  "repository": "git@github.com:dubaua/create-observable.git",
   "author": "Vladimir Lysov",
   "email": "dubaua@gmail.com",
   "license": "MIT",
