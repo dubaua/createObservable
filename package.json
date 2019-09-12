@@ -1,6 +1,6 @@
 {
   "name": "create-observable",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "tiny observable helper",
   "main": "index.js",
   "source": "index.js",
