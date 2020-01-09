@@ -38,7 +38,7 @@ module.exports = function(options) {
       if (next !== this.internal) {
         var prev = this.internal;
         this.internal = next;
-        for (let i = 0; i < this.callbacks.length; i++) {
+        for (var i = 0; i < this.callbacks.length; i++) {
           this.callbacks[i](this.internal, prev);
         }
       }
