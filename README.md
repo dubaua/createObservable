@@ -1,30 +1,29 @@
-# createObservable
+# Observable
 
-A little helper function provides reactive value and callbacks on change. Function accepts object with two optional parameters: `onChange` as callback after change and `inital` as inital value.
+A little class providing reactive value and subscribe method. The method is a higher order function accepting callback as the only parameter and returning unsubscribe function. A callback accepts next value as first parameter and previous value as second. Callback will be fired if instance value is changed.
 
 ```js
-function onChange(value, prevValue) {
-  console.log(value, prevValue);
+const observable = new Observable();
+
+const log = [];
+function logger(next) {
+  log.push(next);
 }
 
-var reactive = createObservable({ onChange: onChange, initial: 0 });
+const stopLogging = observable.subscribe(logger);
 ```
 
-Next, when you assign a new value to your reactive value, callback will be fired, if new value isn't equal to an old one:
+When instance value changed callback will be fired:
 
 ```js
-reactive.value = 35; // onChange fired (35, 0)
-reactive.value = 35; // onChange isn't fired
-reactive.value = 42; // onChange fired (42, 35)
+reactive.value = 35; // log [35]
+reactive.value = 35; // log [35] didn't logged, because value the same
+reactive.value = 42; // log [35, 42]
 ```
 
-Further you can add new callbacks, they all will be fired on value change.
+You can unsubscribe with function returned by `subscribe` method.
 
 ```js
-function anotherCallback(value, prevValue) {
-  console.log(value * 2, prevValue * 2);
-}
-
-reactive.onChange = anotherCallback;
-reactive.value = 20; // onChange fired, (20, 42) anotherCallback fired (40, 84)
+stopLogging();
+reactive.value = 69; // log [35, 42]
 ```

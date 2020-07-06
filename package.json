@@ -1,21 +1,47 @@
 {
-  "name": "create-observable",
-  "version": "1.0.2",
-  "description": "tiny observable helper",
-  "main": "index.js",
-  "source": "index.js",
+  "name": "@dubaua/observable",
+  "version": "2.0.0",
+  "description": "tiny observable class",
+  "source": "src/observable.js",
+  "main": "dist/observable.min.js",
+  "umd:main": "dist/observable.umd.js",
+  "module": "dist/observable.mjs",
   "keywords": [
     "reactive",
     "js"
   ],
-  "repository": "git@github.com:dubaua/create-observable.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dubaua/observable.git"
+  },
   "author": "Vladimir Lysov",
   "email": "dubaua@gmail.com",
-  "license": "MIT",
+  "license": "ISC",
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint": "^7.4.0",
+    "eslint-config-standard": "^14.1.1",
+    "microbundle": "^0.12.2",
+    "mocha": "^8.0.1"
   },
   "scripts": {
-    "test": "mocha ./test/**/*.spec.js"
-  }
+    "test": "mocha --require @babel/register src/observable.spec.js",
+    "build": "microbundle --name Observable --strict"
+  },
+  "minify": {
+    "mangle": {
+      "reserved": [
+        "Observable"
+      ]
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/dubaua/observable/issues"
+  },
+  "homepage": "https://github.com/dubaua/observable#readme"
 }
